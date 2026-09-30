@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: ${BANKING_DB_URL:jdbc:postgresql://localhost:5432/banking}
+    username: ${BANKING_DB_USERNAME:banking}
+    password: ${BANKING_DB_PASSWORD:banking}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true

@@ -3,6 +3,7 @@ package com.toninitech.banking.account.infrastructure;
 import com.toninitech.banking.account.application.AccountRepository;
 import com.toninitech.banking.account.domain.BankAccount;
 import org.springframework.stereotype.Repository;
+import org.springframework.context.annotation.Profile;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -11,6 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 @Repository
+@Profile("in-memory")
 public class InMemoryAccountRepository implements AccountRepository {
 
     private final ConcurrentMap<UUID, BankAccount> accounts = new ConcurrentHashMap<>();
@@ -28,4 +30,3 @@ public class InMemoryAccountRepository implements AccountRepository {
         return Optional.ofNullable(accounts.get(accountId));
     }
 }
-

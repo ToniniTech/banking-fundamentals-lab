@@ -22,12 +22,30 @@ Proyecto educativo incremental para estudiar fundamentos de Java y Spring median
 - pruebas unitarias, `@WebMvcTest` y `@SpringBootTest`;
 - laboratorios de dependencias inexistentes y ambiguas.
 
-La aplicacion todavia no contiene JPA, PostgreSQL, transacciones, seguridad ni mensajeria.
+### Unidad 3: JPA, Hibernate y PostgreSQL
+
+- entidad de persistencia separada del dominio;
+- adaptador JPA para el puerto `AccountRepository`;
+- migraciones versionadas con Flyway;
+- persistence context e identidad de objetos administrados;
+- estados managed y detached;
+- dirty checking y `flush`;
+- pruebas reales contra PostgreSQL con Testcontainers.
+
+La aplicacion todavia no define limites transaccionales en los servicios, niveles de
+aislamiento, locking, seguridad ni mensajeria. Esos temas pertenecen a unidades posteriores.
 
 ## Requisitos
 
 - Java 21;
-- PowerShell o una terminal compatible con Maven Wrapper.
+- PowerShell o una terminal compatible con Maven Wrapper;
+- Docker Desktop para PostgreSQL local y los laboratorios de persistencia.
+
+## Iniciar PostgreSQL
+
+```powershell
+docker compose up -d
+```
 
 ## Ejecutar la aplicacion
 
@@ -35,6 +53,12 @@ En Windows:
 
 ```powershell
 .\mvnw.cmd spring-boot:run
+```
+
+Para repasar la Unidad 2 sin base de datos:
+
+```powershell
+.\mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=in-memory"
 ```
 
 Abrir una cuenta desde otra terminal:
@@ -60,6 +84,16 @@ Invoke-RestMethod `
 
 Antes de ejecutar los laboratorios, lee y responde las preguntas de [`docs/unit-02-spring-basics.md`](docs/unit-02-spring-basics.md).
 
+## Ejecutar las pruebas de la Unidad 3
+
+Con Docker Desktop iniciado:
+
+```powershell
+.\mvnw.cmd "-Dtest=AccountJpaEntityMappingTest,PostgresAccountRepositoryTest,PersistenceContextLabTest" test
+```
+
+Antes de ejecutarlas, completa las predicciones de [`docs/unit-03-jpa-hibernate.md`](docs/unit-03-jpa-hibernate.md).
+
 ## Estructura actual
 
 ```text
@@ -69,7 +103,7 @@ src/main/java/com/toninitech/banking/
 │   ├── api/                 HTTP, DTO y respuestas
 │   ├── application/         casos de uso y puertos
 │   ├── domain/              Java puro de la Unidad 1
-│   └── infrastructure/      repositorio temporal en memoria
+│   └── infrastructure/      adaptadores en memoria y JPA
 └── shared/
     ├── api/                 traduccion centralizada de errores
     └── money/               value object de la Unidad 1
@@ -81,5 +115,6 @@ src/test/java/com/toninitech/banking/
 
 ## Regla de avance
 
-La Unidad 3 introducira JPA y PostgreSQL solo cuando se pueda explicar el ciclo completo de una peticion, la creacion de beans y la resolucion de dependencias de la Unidad 2.
+La Unidad 4 introducira limites transaccionales en los casos de uso solo cuando se
+pueda explicar el persistence context, dirty checking y `flush` de la Unidad 3.
 
