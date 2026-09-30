@@ -32,6 +32,15 @@ Proyecto educativo incremental para estudiar fundamentos de Java y Spring median
 - dirty checking y `flush`;
 - pruebas reales contra PostgreSQL con Testcontainers.
 
+### Unidad 4: Transacciones de Spring
+
+- transferencia atomica entre dos cuentas;
+- `@Transactional` como frontera de aplicacion;
+- commit, rollback y diferencia frente a `flush`;
+- rollback por defecto para `RuntimeException`;
+- laboratorio de excepciones checked y `rollbackFor`;
+- proxy transaccional y self-invocation.
+
 La aplicacion todavia no define limites transaccionales en los servicios, niveles de
 aislamiento, locking, seguridad ni mensajeria. Esos temas pertenecen a unidades posteriores.
 
@@ -94,6 +103,16 @@ Con Docker Desktop iniciado:
 
 Antes de ejecutarlas, completa las predicciones de [`docs/unit-03-jpa-hibernate.md`](docs/unit-03-jpa-hibernate.md).
 
+## Ejecutar las pruebas de la Unidad 4
+
+Con Docker Desktop iniciado:
+
+```powershell
+.\mvnw.cmd "-Dtest=TransferTransactionIntegrationTest" test
+```
+
+Sigue el orden y las predicciones de [`docs/unit-04-transactions.md`](docs/unit-04-transactions.md).
+
 ## Estructura actual
 
 ```text
@@ -115,6 +134,7 @@ src/test/java/com/toninitech/banking/
 
 ## Regla de avance
 
-La Unidad 4 introducira limites transaccionales en los casos de uso solo cuando se
-pueda explicar el persistence context, dirty checking y `flush` de la Unidad 3.
+La Unidad 4 introduce limites transaccionales en un unico caso de uso: la
+transferencia. Antes de avanzar a concurrencia, debes poder explicar el
+persistence context, dirty checking, `flush`, commit y rollback.
 
