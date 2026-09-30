@@ -1,0 +1,32 @@
+name: Java CI con Maven
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Descargar el código del repositorio
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      # 2. Configurar el entorno de Java (JDK 17 como ejemplo común, cámbialo si usas otra versión)
+      - name: Configurar JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      # 3. Dar permisos de ejecución al Maven Wrapper (el archivo mvnw que tienes en la raíz)
+      - name: Dar permisos de ejecución a mvnw
+        run: chmod +x mvnw
+
+      # 4. Compilar y ejecutar las pruebas unitarias automáticas
+      - name: Compilar y ejecutar Tests
+        run: ./mvnw clean verify

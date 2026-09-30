@@ -68,7 +68,7 @@ public final class BankAccount {
     private static void requirePositive(Money amount){
         Objects.requireNonNull(amount, "amount required");
         if (!amount.isPositive()){
-            throw new IllegalStateException();
+            throw new IllegalArgumentException();
         }
     }
 
