@@ -41,3 +41,10 @@ no declaran limites transaccionales. Los tests JPA usan la transaccion provista 
 `@DataJpaTest` solamente como instrumento para observar el persistence context.
 Propagacion, rollback, aislamiento, proxies y self-invocation pertenecen a la Unidad 4.
 
+## Limite de la Unidad 4
+
+La transaccion se introduce solamente alrededor de una transferencia entre dos
+cuentas. Se estudian commit, rollback, excepciones checked y self-invocation.
+No se agregan propagacion avanzada, niveles de aislamiento, locking, idempotencia
+ni mensajeria.
+
